@@ -70,9 +70,8 @@ namespace Logic
             Swap(ref array[index], ref array[index - 1]);
 
             Array.Sort(array, index, array.Length - index);
-            str = string.Concat(array);
 
-            return int.Parse(str);
+            return Convert.ToInt32(new string(array));
         }
 
         private static void Swap(ref char a, ref char b)
