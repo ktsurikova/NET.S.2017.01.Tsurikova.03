@@ -28,5 +28,21 @@ namespace Logic.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod] 
+        public void NextBiggerNumber_12_Returned21()
+        {
+            //Arrange Act Assert (AAA)
+
+            //Arrange
+            int number = 12;
+            int next = 21;
+
+            //Act
+            int actual = NumberExtension.NextBiggerNumber(number);
+
+            //Assert
+            Assert.AreEqual(next, actual);
+        }
     }
 }
