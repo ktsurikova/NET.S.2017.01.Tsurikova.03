@@ -13,6 +13,9 @@ namespace Logic
     {
         #region Insertion
 
+        const int MaxNumber = 0x7fffffff;
+        const int MaxNumberOfBite = 31;
+
         /// <summary>
         /// inserts second number from i to j bits in first number
         /// </summary>
@@ -25,24 +28,23 @@ namespace Logic
         /// <returns>obtained number</returns>
         public static int Insertion(int num1, int num2, int i, int j)
         {
-            if (i < 0 || i > 31) throw new ArgumentOutOfRangeException("i doesn't belong to allowable range");
-            if (j < 0 || j > 31) throw new ArgumentOutOfRangeException("j doesn't belong to allowable range");
-            if (j < i) throw new ArgumentException("i must be less then j");
+            if (i < 0 || i > MaxNumberOfBite) throw new ArgumentOutOfRangeException($"{nameof(i)} doesn't belong to allowable range");
+            if (j < 0 || j > MaxNumberOfBite) throw new ArgumentOutOfRangeException($"{nameof(j)} doesn't belong to allowable range");
+            if (j < i) throw new ArgumentException($"{nameof(i)} must be less then {nameof(j)}");
 
             int amount = j - i + 1;
-            int max = 0x7fffffff;
             int mask;
 
-            mask = max >> (31 - amount);
+            mask = MaxNumber >> (MaxNumberOfBite - amount);
             int num2Tail = num2 & mask;
 
-            mask = max >> (31 - i);
+            mask = MaxNumber >> (MaxNumberOfBite - i);
             int num1Tail = num1 & mask;
 
             num2Tail = num2Tail << i;
             num2Tail = num2Tail | num1Tail;
 
-            mask = max >> (31 - j - 1);
+            mask = MaxNumber >> (MaxNumberOfBite - j - 1);
             return (num1 & ~mask) | num2Tail;
         }
 
@@ -71,7 +73,9 @@ namespace Logic
 
             Array.Sort(array, index, array.Length - index);
 
-            return Convert.ToInt32(new string(array));
+            str = string.Concat(array);
+            return int.Parse(str);
+            //return Convert.ToInt32(new string(array));
         }
 
         private static void Swap(ref char a, ref char b)
