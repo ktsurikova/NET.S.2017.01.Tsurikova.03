@@ -14,7 +14,7 @@ namespace Logic
         #region Insertion
 
         const int MaxNumber = 0x7fffffff;
-        const int MaxNumberOfBite = 31;
+        const int MaxNumberOfBit = 31;
 
         /// <summary>
         /// inserts second number from i to j bits in first number
@@ -28,23 +28,23 @@ namespace Logic
         /// <returns>obtained number</returns>
         public static int Insertion(int num1, int num2, int i, int j)
         {
-            if (i < 0 || i > MaxNumberOfBite) throw new ArgumentOutOfRangeException($"{nameof(i)} doesn't belong to allowable range");
-            if (j < 0 || j > MaxNumberOfBite) throw new ArgumentOutOfRangeException($"{nameof(j)} doesn't belong to allowable range");
+            if (i < 0 || i > MaxNumberOfBit) throw new ArgumentOutOfRangeException($"{nameof(i)} doesn't belong to allowable range");
+            if (j < 0 || j > MaxNumberOfBit) throw new ArgumentOutOfRangeException($"{nameof(j)} doesn't belong to allowable range");
             if (j < i) throw new ArgumentException($"{nameof(i)} must be less then {nameof(j)}");
 
             int amount = j - i + 1;
             int mask;
 
-            mask = MaxNumber >> (MaxNumberOfBite - amount);
+            mask = MaxNumber >> (MaxNumberOfBit - amount);
             int num2Tail = num2 & mask;
 
-            mask = MaxNumber >> (MaxNumberOfBite - i);
+            mask = MaxNumber >> (MaxNumberOfBit - i);
             int num1Tail = num1 & mask;
 
             num2Tail = num2Tail << i;
             num2Tail = num2Tail | num1Tail;
 
-            mask = MaxNumber >> (MaxNumberOfBite - j - 1);
+            mask = MaxNumber >> (MaxNumberOfBit - j - 1);
             return (num1 & ~mask) | num2Tail;
         }
 
