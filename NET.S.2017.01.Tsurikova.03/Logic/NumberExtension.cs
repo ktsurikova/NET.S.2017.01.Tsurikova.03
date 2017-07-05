@@ -69,9 +69,13 @@ namespace Logic
             if (index == 0) return -1;
 
             char[] array = str.ToCharArray();
-            Swap(ref array[index], ref array[index - 1]);
 
-            Array.Sort(array, index, array.Length - index);
+            if (array[index - 1] < array[array.Length - 1])
+                Swap(ref array[index - 1], ref array[array.Length - 1]);
+            else
+                Swap(ref array[index], ref array[index - 1]);
+
+            Array.Reverse(array, index, array.Length-index);
 
             str = string.Concat(array);
             return int.Parse(str);
@@ -83,7 +87,7 @@ namespace Logic
             char temp = a;
             a = b;
             b = temp;
-        } 
+        }
 
         #endregion
     }

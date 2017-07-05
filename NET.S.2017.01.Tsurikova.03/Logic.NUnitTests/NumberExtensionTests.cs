@@ -61,6 +61,7 @@ namespace Logic.NUnitTests
         [TestCase(414, ExpectedResult = 441)]
         [TestCase(144, ExpectedResult = 414)]
         [TestCase(1234321, ExpectedResult = 1241233)]
+        [TestCase(1204321, ExpectedResult = 1210234)]
         [TestCase(1234126, ExpectedResult = 1234162)]
         [TestCase(3456432, ExpectedResult = 3462345)]
         [TestCase(10, ExpectedResult = -1)]
