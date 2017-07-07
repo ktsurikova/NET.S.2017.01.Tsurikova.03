@@ -90,5 +90,23 @@ namespace Logic
         }
 
         #endregion
+
+        #region Root
+
+        public static double Root(double number, int degree, double precision = 0.0001)
+        {
+            double x0 = 1;
+            double xk = 1.0 / degree * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
+
+            while (Math.Abs(xk - x0) > precision)
+            {
+                x0 = xk;
+                xk = 1.0 / degree * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
+            }
+
+            return xk;
+        }
+
+        #endregion
     }
 }
