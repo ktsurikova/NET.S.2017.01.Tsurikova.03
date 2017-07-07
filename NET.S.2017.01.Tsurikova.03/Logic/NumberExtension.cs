@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,11 +76,44 @@ namespace Logic
             else
                 Swap(ref array[index], ref array[index - 1]);
 
-            Array.Reverse(array, index, array.Length-index);
+            Array.Reverse(array, index, array.Length - index);
 
             str = string.Concat(array);
             return int.Parse(str);
             //return Convert.ToInt32(new string(array));
+        }
+
+        /// <summary>
+        /// finds next bigger number and time elapsed
+        /// </summary>
+        /// <param name="number">initial number</param>
+        /// <returns>tuple: bigger number if it exists, otherwise -1 and elapsed time</returns>
+        public static Tuple<int, TimeSpan> NextBiggerNumberAndTimeTuple(int number)
+        {
+            Stopwatch watch = new Stopwatch();
+
+            watch.Start();
+            number = NextBiggerNumber(number);
+            watch.Stop();
+
+            return new Tuple<int, TimeSpan>(number, watch.Elapsed);
+        }
+        /// <summary>
+        /// finds next bigger number and time elapsed
+        /// </summary>
+        /// <param name="number">initial number</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>bigger number if it exists, otherwise -1</returns>
+        public static int NextBiggerNumberAndTimeOutParametr(int number, out TimeSpan time)
+        {
+            Stopwatch watch = new Stopwatch();
+
+            watch.Start();
+            number = NextBiggerNumber(number);
+            watch.Stop();
+            time = watch.Elapsed;
+
+            return number;
         }
 
         private static void Swap(ref char a, ref char b)
@@ -102,7 +136,7 @@ namespace Logic
         /// <returns>value of the root with a given precision</returns>
         public static double Root(double number, int degree, double precision = 0.0001)
         {
-            if (precision<0) throw new ArgumentOutOfRangeException($"{nameof(precision)} must be positive");
+            if (precision < 0) throw new ArgumentOutOfRangeException($"{nameof(precision)} must be positive");
 
             if (degree < 0)
             {
