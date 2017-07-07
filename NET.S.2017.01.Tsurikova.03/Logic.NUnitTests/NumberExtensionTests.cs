@@ -81,6 +81,7 @@ namespace Logic.NUnitTests
         [TestCase(0.04100625, 4, 0.45)]
         [TestCase(8, 3, 2)]
         [TestCase(0.0279936, 7, 0.6)]
+        [TestCase(97.65625, -5, 0.4)]
         public static void Root_Number_Degree_Result(double number, int degree, double expected)
         {
             double actual = NumberExtension.Root(number, degree);
@@ -95,6 +96,14 @@ namespace Logic.NUnitTests
         {
             double actual = NumberExtension.Root(number, degree, precision);
             Assert.AreEqual(expected, actual, precision);
+        }
+
+        [TestCase(8, 15, -7, -5)]
+        [TestCase(8, 15, -0.6, -0.1)]
+        public void Root_Number_Degree_Precision_ArgumentOutOfRangeException(double number, int degree,
+            double precision, double expected)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => NumberExtension.Root(number, degree, precision));
         }
 
         #endregion

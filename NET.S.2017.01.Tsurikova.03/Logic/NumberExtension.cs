@@ -92,9 +92,24 @@ namespace Logic
         #endregion
 
         #region Root
-
+        /// <summary>
+        /// calculates root of given degree
+        /// </summary>
+        /// <param name="number">number from which root is extracted</param>
+        /// <param name="degree">degree of root</param>
+        /// <param name="precision">precision of calculation</param>
+        /// <exception cref="ArgumentOutOfRangeException">throws when precision isn't positive</exception>
+        /// <returns>value of the root with a given precision</returns>
         public static double Root(double number, int degree, double precision = 0.0001)
         {
+            if (precision<0) throw new ArgumentOutOfRangeException($"{nameof(precision)} must be positive");
+
+            if (degree < 0)
+            {
+                number = 1.0 / number;
+                degree *= -1;
+            }
+
             double x0 = 1;
             double xk = 1.0 / degree * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
 
